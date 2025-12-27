@@ -1,7 +1,7 @@
 // declare all i/p and o/p , reg, parameters, wire
 module FIFO #( parameter data_width = 8,
                 parameter depth = 16,
-                parameter ptr_size = 4)
+              parameter ptr_size = 4)  //parameter data_width,depth,ptr_size
   (input clk,reset,write_en,read_en,
             input [data_width-1:0] data_in,
             output empty, full,
@@ -12,7 +12,7 @@ module FIFO #( parameter data_width = 8,
   reg [ptr_size : 0 ]count;
   reg empty_reg, full_reg;
   integer i;
-  // reg [data_width-1:0] data_out_reg
+  // reg [data_width-1:0] data_out_reg data_width,depth,ptr_size
   
   //  write process
   always@(posedge clk or posedge reset) begin
@@ -21,7 +21,7 @@ module FIFO #( parameter data_width = 8,
     else if(write_en && !(full_reg))
       wr_ptr <= wr_ptr+1'b1;
   end
-  // count
+  // using count define full_reg / empty_reg
   always @(posedge clk or posedge reset) begin
     if(reset)
       count<= 0;
